@@ -1,5 +1,5 @@
 import pygame
-
+import createBlitz
 
 def main():
 
@@ -11,6 +11,8 @@ def main():
 
     running = True
 
+    createBlitz.drawShapes(createBlitz.simpleRect)
+    
     #main loop
     while running:
 
@@ -19,8 +21,9 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        #functions for making the game work and shit goes here.
-        #will need a separate file for readability sake.
+        
+
+        pygame.display.flip()
 
 
 if __name__ == "__main__":
