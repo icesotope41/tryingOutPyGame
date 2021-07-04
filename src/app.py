@@ -1,5 +1,5 @@
 import pygame
-import createBlitz
+import createBlitz as blitMake
 
 def main():
 
@@ -20,7 +20,7 @@ def main():
                 pygame.display.quit()
 
         #pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
-        newRect = RectBlit(blue, (10,10,100,200))
+        newRect = blitMake.RectBlit(blitMake.colours['blue'], (10,10,100,200))
         newRect.createBlit(screen)
 
         pygame.display.flip()
