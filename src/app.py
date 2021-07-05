@@ -7,12 +7,9 @@ def main():
 
     pygame.display.set_caption("Hello Game")
 
-    screen = pygame.display.set_mode((720,480))
-
-    running = True
-
-    createBlitz.drawShapes(createBlitz.simpleRect)
+    global screen = pygame.display.set_mode((720,480))
     
+    running = True
     #main loop
     while running:
 
@@ -21,7 +18,7 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        
+        pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
 
         pygame.display.flip()
 
