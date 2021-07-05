@@ -7,7 +7,8 @@ def main():
 
     pygame.display.set_caption("Hello Game")
 
-    global screen = pygame.display.set_mode((720,480))
+    global screen
+    screen = pygame.display.set_mode((720,480))
     
     running = True
     #main loop
