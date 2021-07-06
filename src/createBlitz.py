@@ -1,10 +1,24 @@
-import pygame
-from pygame import display
-from pygame.surface import Surface 
+import draw from pygame
 
-simpleRect = color, rect = (255, 0, 0), (200, 100, 200, 100)
+colours = {
+    'red' : (255,0,0)
+    'green' : (0,255,0)
+    'blue' : (0,0,255)
+    'yellow' : (255,255,0)
+    'white' : (255,255,255)
+    'black' : (0,0,0)
+}
 
-
-
-def drawShapes(surface, rectType):
-    pygame.draw.rect(surface, rectType)
+    
+class RectBlit():
+    
+    def  __init__(self, colour, rect):
+        self.colour = colour
+        self.rect = rect
+        
+    def createBlit(self, surface):
+        pygame.draw.rect(surface, self.colour, self.rect)
+        
+  
+        
+    
