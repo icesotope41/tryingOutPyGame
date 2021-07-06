@@ -19,7 +19,9 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
+        #pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
+        newRect = RectBlit(blue, (10,10,100,200))
+        newRect.createBlit(screen)
 
         pygame.display.flip()
 
