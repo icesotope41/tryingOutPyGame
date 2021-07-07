@@ -1,5 +1,5 @@
 import pygame
-
+import createBlitz as blitMake
 
 def main():
 
@@ -7,10 +7,10 @@ def main():
 
     pygame.display.set_caption("Hello Game")
 
+    global screen
     screen = pygame.display.set_mode((720,480))
-
+    
     running = True
-
     #main loop
     while running:
 
@@ -19,8 +19,11 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        #functions for making the game work and shit goes here.
-        #will need a separate file for readability sake.
+        #pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
+        newRect = blitMake.RectBlit(blitMake.colours['blue'], (10,10,100,200))
+        newRect.createBlit(screen)
+
+        pygame.display.flip()
 
 
 if __name__ == "__main__":
