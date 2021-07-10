@@ -1,29 +1,73 @@
 import pygame
-import createBlitz as blitMake
+from createBlitz import RectBlit,colours
+
 
 def main():
 
-    pygame.init()
+    screenHeight = 480
+    screenWidth = 720
 
+    pygame.init()
     pygame.display.set_caption("Hello Game")
 
-    global screen
-    screen = pygame.display.set_mode((720,480))
-    
-    running = True
-    #main loop
-    while running:
+    display = pygame.display
+    screen = display.set_mode((screenWidth,screenHeight), pygame.RESIZABLE)
+    display.init()
 
-        for event in pygame.event.get():
+    #main loop
+    running = True
+    while running:
+        gameEvents = pygame.event.get()
+
+        for event in gameEvents:
             if event.type == pygame.QUIT:
                 running = False
                 pygame.display.quit()
 
-        #pygame.draw.rect(screen, (0,255,0), (10,10,100,200))
-        newRect = blitMake.RectBlit(blitMake.colours['blue'], (10,10,100,200))
+        #----------------------------------#
+
+        relativeX = screenWidth * 0.45 #centered
+        relativeY = screenHeight * 0.8 #bottom page
+        #^ these two var may need to change in the future. prob make local in functions. 
+
+        newRect = RectBlit(colours['blue'], (relativeX,relativeY,100,200))
         newRect.createBlit(screen)
 
-        pygame.display.flip()
+        attacked = False
+        while attacked == False:
+
+            mvingSq = RectBlit(colours['green'], (relativeX, relativeY, 100, 100))
+            mvingSq.createBlit(screen)
+
+            for event in gameEvents:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pos = pygame.mouse.get_pos()
+            
+                if mvingSq.rect.collidepoint(pos):
+                    attacked == True
+
+
+            if relativeX == 10:
+                relativeY -= 10
+                relativeX += 1
+
+            elif relativeY == screenHeight - 10:
+                relativeX += 5 
+                relativeY -= 1
+        
+            elif relativeX == screenWidth - 10:
+                relativeY += 10
+                relativeX -= 1
+
+            elif relativeY == 10:
+                relativeX -= 5
+                relativeY += 1
+
+            else:
+                relativeX -= 5
+
+
+        pygame.display.update()
 
 
 if __name__ == "__main__":
