@@ -1,44 +1,8 @@
 import pygame
 from createBlitz import RectBlit,colours
 
-
-def moveSquare(x,y,maxX,maxY):
-
-    pygame.time.delay(1000)
-            
-    """
-    for event in gameEvents:
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            pos = pygame.mouse.get_pos()
-    
-        if mvingSq.rect.collidepoint(pos):
-            attacked == True
-    """
-
-    if x == 10:
-        y -= 10
-        x += 1
-        print("a")
-    elif y == maxY - 10:
-        x += 5 
-        y -= 1
-        print("b")
-    elif x == maxX - 10:
-        y += 10
-        x -= 1
-        print("c")
-    elif y == 10:
-        x -= 5
-        y += 1
-        print("d")
-    else:
-        x -= 5
-        print('e')
-        print(y)
-        print(x)
-        
-    pygame.display.update()
-
+def checkcollide():
+    pass
 
 def main():
 
@@ -52,6 +16,13 @@ def main():
     screen = display.set_mode((screenWidth,screenHeight), pygame.RESIZABLE)
     display.init()
 
+    def pause(t):
+        pygame.time.delay(t)
+
+    x = screenWidth * 0.45 #centered
+    y = screenHeight * 0.8 #bottom page
+    #^ these two var may need to change in the future. prob make local in functions. 
+
     #main loop
     running = True
     while running:
@@ -62,19 +33,36 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        relativeX = screenWidth * 0.45 #centered
-        relativeY = screenHeight * 0.8 #bottom page
-        #^ these two var may need to change in the future. prob make local in functions. 
-
-        mvingSq = RectBlit(colours['green'], (relativeX, relativeY, 100, 100))
+        mvingSq = RectBlit(colours['green'], (x, y, 100, 100))
         mvingSq.createBlit(screen)
 
-        attacked = False
-        while attacked is False:
-            moveSquare(relativeX,relativeY,screenWidth,screenHeight)
+        #moving the box
+        #---------------------------------#
+        xChange = 30
+        yChange = 20
 
+        if x < 10:
+            y -= yChange
+            if y < 10:
+                x += xChange
+        elif y < 10:
+            x += xChange
+            if x > screenWidth - 120:
+                y += yChange
+        elif x > screenWidth - 120:
+            y += yChange
+            if y > screenHeight - 110:
+                x -= xChange
+        elif y > screenHeight - 110:
+            x -= xChange
+        #---------------------------------#
+        
         pygame.display.update()
-
+        pause(50)
+        screen.fill(colours["black"])
+        print("({},{})".format(x,y))
+        pygame.display.update()
+        
 
 if __name__ == "__main__":
     main()
