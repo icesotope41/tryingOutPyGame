@@ -18,30 +18,32 @@ def moveSquare(x,y,maxX,maxY):
         y -= 10
         x += 1
         print("a")
-        pygame.display.update()
+        
 
     elif y == maxY - 10:
         x += 5 
         y -= 1
         print("b")
-        pygame.display.update()
+        
         
     elif x == maxX - 10:
         y += 10
         x -= 1
         print("c")
-        pygame.display.update()
+    
 
     elif y == 10:
         x -= 5
         y += 1
         print("d")
-        pygame.display.update()
+        
 
     else:
         x -= 5
         print('e')
-        pygame.display.update()
+        
+    pygame.display.update()
+
 
 def main():
 
