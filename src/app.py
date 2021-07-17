@@ -65,16 +65,12 @@ def main():
                 running = False
                 pygame.display.quit()
 
-        #----------------------------------#
-
         relativeX = screenWidth * 0.45 #centered
         relativeY = screenHeight * 0.8 #bottom page
         #^ these two var may need to change in the future. prob make local in functions. 
-        
 
         mvingSq = RectBlit(colours['green'], (relativeX, relativeY, 100, 100))
         mvingSq.createBlit(screen)
-
 
         attacked = False
         while attacked is False:
