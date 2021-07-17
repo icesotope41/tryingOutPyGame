@@ -19,22 +19,18 @@ def moveSquare(x,y,maxX,maxY):
         y -= 10
         x += 1
         print("a")
-
     elif y == maxY - 10:
         x += 5 
         y -= 1
         print("b")
-        
     elif x == maxX - 10:
         y += 10
         x -= 1
         print("c")
-
     elif y == 10:
         x -= 5
         y += 1
         print("d")
-        
     else:
         x -= 5
         print('e')
