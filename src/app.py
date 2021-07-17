@@ -1,6 +1,47 @@
 import pygame
 from createBlitz import RectBlit,colours
 
+def moveSquare(x,y,maxX,maxY):
+
+    pygame.time.delay(1000)
+            
+    """
+    for event in gameEvents:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+    
+        if mvingSq.rect.collidepoint(pos):
+            attacked == True
+    """
+
+    if x == 10:
+        y -= 10
+        x += 1
+        print("a")
+        pygame.display.update()
+
+    elif y == maxY - 10:
+        x += 5 
+        y -= 1
+        print("b")
+        pygame.display.update()
+        
+    elif x == maxX - 10:
+        y += 10
+        x -= 1
+        print("c")
+        pygame.display.update()
+
+    elif y == 10:
+        x -= 5
+        y += 1
+        print("d")
+        pygame.display.update()
+
+    else:
+        x -= 5
+        print('e')
+        pygame.display.update()
 
 def main():
 
@@ -29,42 +70,15 @@ def main():
         relativeX = screenWidth * 0.45 #centered
         relativeY = screenHeight * 0.8 #bottom page
         #^ these two var may need to change in the future. prob make local in functions. 
+        
 
-        newRect = RectBlit(colours['blue'], (relativeX,relativeY,100,200))
-        newRect.createBlit(screen)
+        mvingSq = RectBlit(colours['green'], (relativeX, relativeY, 100, 100))
+        mvingSq.createBlit(screen)
+
 
         attacked = False
-        while attacked == False:
-
-            mvingSq = RectBlit(colours['green'], (relativeX, relativeY, 100, 100))
-            mvingSq.createBlit(screen)
-
-            for event in gameEvents:
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    pos = pygame.mouse.get_pos()
-            
-                if mvingSq.rect.collidepoint(pos):
-                    attacked == True
-
-
-            if relativeX == 10:
-                relativeY -= 10
-                relativeX += 1
-
-            elif relativeY == screenHeight - 10:
-                relativeX += 5 
-                relativeY -= 1
-        
-            elif relativeX == screenWidth - 10:
-                relativeY += 10
-                relativeX -= 1
-
-            elif relativeY == 10:
-                relativeX -= 5
-                relativeY += 1
-
-            else:
-                relativeX -= 5
+        while attacked is False:
+            moveSquare(relativeX,relativeY,screenWidth,screenHeight)
 
 
         pygame.display.update()
