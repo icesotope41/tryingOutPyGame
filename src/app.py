@@ -61,7 +61,7 @@ def main():
         mvingSq = RectBlit(colours['green'], (x, y, 100, 100))
         mvingSq.createBlit(screen)
 
-        #-----------------#
+        #------------------------#
         if x < 10:
             y -= yChange
             if y < 10:
