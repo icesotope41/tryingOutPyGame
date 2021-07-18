@@ -5,13 +5,13 @@ screenHeight = 480
 screenWidth = 720
 
 def text_objects(text, font):
-    textSurface = font.render(text, True, colours["black"])
+    textSurface = font.render(text, True, colours["white"])
     return textSurface, textSurface.get_rect()
 
 
 def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
-    TextSurf, TextRect = text_objects(text, largeText)
+    textFont = pygame.font.Font('freesansbold.ttf',115)
+    TextSurf, TextRect = text_objects(text, textFont)
     TextRect.center = ((screenWidth/2),(screenHeight/2))
     screen.blit(TextSurf, TextRect)
 
@@ -49,7 +49,9 @@ def main():
         pygame.time.delay(t)
 
     #main loop
+    gameOver = False
     running = True
+
     while running:
         gameEvents = pygame.event.get()
 
@@ -80,12 +82,18 @@ def main():
 
         checkCollide(gameEvents, x, y)
         if pos[0] > x and pos[0] < x + 100 and pos[1] > y and pos[1] < y + 100:
-                xChange = 0
-                yChange = 0
+            xChange = 0
+            yChange = 0
+            message_display('Stopped!')
+            gameOver = True
         
         pygame.display.update()
         pause(50)
-        screen.fill(colours["black"])
+
+        if not gameOver == True:
+            screen.fill(colours["black"])
+            print("gameover = {}".format(not gameOver == True))
+
         #print("({},{})".format(x,y))
         pygame.display.update()
         
