@@ -16,11 +16,9 @@ def message_display(text, textSize, xPos, yPos):
     screen.blit(TextSurf, TextRect)
 
 
-def checkCollide(gameEvents, rightXCoord, topYCoord):
+def checkCollide(gameEvents):
     global pos
     pos = (-1000, -1000)
-    leftXCoord = rightXCoord + 100
-    botYCoord = topYCoord + 100
 
     for event in gameEvents:
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -31,11 +29,13 @@ def checkFollowing():
     pass    
 
 
-def createMenu():
-    buttonGM1 = RectBlit(colours['white'], (screenWidth/2 - 100, screenHeight/4*3, 200, 100))
-    buttonGM2 = RectBlit(colours['white'], (screenWidth/2 - 100, screenWidth/4 + 50, 200, 100))
+def createMenu(x, y1, y2):
+    buttonGM1 = RectBlit(colours['white'], (x, y1, 200, 100))
+    buttonGM2 = RectBlit(colours['white'], (x, y2, 200, 100))
     buttonGM1.createBlit(screen)
     buttonGM2.createBlit(screen)
+
+
     
 
 def main():
@@ -52,6 +52,10 @@ def main():
     x = screenWidth * 0.45 #centered(in small window...)
     y = screenHeight * 0.8 #bottom page
     #^ these two var may need to change in the future. prob make local in functions. 
+
+    btnXCoord = screenWidth/2 -100
+    btn1YCoord = screenHeight/4*3
+    btn2YCoord = screenHeight/4 + 50
 
     def pause(t):
         pygame.time.delay(t)
@@ -78,38 +82,45 @@ def main():
         #menu 
         #------------------------#
         if menuOpen:
-            createMenu()
+            createMenu(btnXCoord, btn1YCoord, btn2YCoord)
+
+            checkCollide(gameEvents)
+            if pos[0] > btnXCoord and pos[0] < btnXCoord + 200 and pos[1] > btn1YCoord and pos[1] < btn1YCoord + 200:
+                gameMode = 1
+                menuOpen = False
+                gameStarted = True
+            elif pos[0] > btnXCoord and pos[0] < btnXCoord + 200 and pos[1] > btn2YCoord and pos[1] < btn2YCoord + 200:
+                gameMode = 2
+                menuOpen = False
+                gameStarted = True
+
             pygame.display.update()
-            print('hello')
         #------------------------#
 
-        if gameStarted:
-            #square moving
-            #------------------------#
+        elif gameStarted:
+
             mvingSq = RectBlit(colours['green'], (x, y, 100, 100))
             mvingSq.createBlit(screen)
-
-
-            if x < 10:
-                y -= yChange
-                if y < 10:
-                    x += xChange
-            elif y < 10:
-                x += xChange
-                if x > screenWidth - 120:
-                    y += yChange
-            elif x > screenWidth - 120:
-                y += yChange
-                if y > screenHeight - 110:
-                    x -= xChange
-            elif y > screenHeight - 110:
-                x -= xChange
-            #------------------------#
 
             #click the box game
             #------------------------#
             if gameMode == 1:
-                checkCollide(gameEvents, x, y)
+                if x < 10:
+                    y -= yChange
+                    if y < 10:
+                        x += xChange
+                elif y < 10:
+                    x += xChange
+                    if x > screenWidth - 120:
+                        y += yChange
+                elif x > screenWidth - 120:
+                    y += yChange
+                    if y > screenHeight - 110:
+                        x -= xChange
+                elif y > screenHeight - 110:
+                    x -= xChange
+
+                checkCollide(gameEvents)
                 if pos[0] > x and pos[0] < x + 100 and pos[1] > y and pos[1] < y + 100:
                     xChange = 0
                     yChange = 0
@@ -119,8 +130,10 @@ def main():
 
             #help the box game
             #------------------------#
-            if gameMode == 2:
+            elif gameMode == 2:
                 pass
+                message_display('Soon', 115, screenWidth/2, screenHeight/2)
+                gameOver = True
             #------------------------#
             
             #refesh display
@@ -128,7 +141,7 @@ def main():
             pygame.display.update()
             pause(50)
 
-            if gameOver:
+            if gameOver == False:
                 screen.fill(colours["black"])
 
             pygame.display.update()
