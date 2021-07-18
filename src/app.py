@@ -4,14 +4,14 @@ from createBlitz import RectBlit,colours
 screenHeight = 480
 screenWidth = 720
 
-def text_objects(text, font):
-    textSurface = font.render(text, True, colours["white"])
+def text_objects(text, font, colour):
+    textSurface = font.render(text, True, colour)
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text, textSize, xPos, yPos):
+def message_display(text, textSize, xPos, yPos, colour):
     textFont = pygame.font.Font('freesansbold.ttf',textSize)
-    TextSurf, TextRect = text_objects(text, textFont)
+    TextSurf, TextRect = text_objects(text, textFont, colour)
     TextRect.center = ((xPos),(yPos))
     screen.blit(TextSurf, TextRect)
 
@@ -34,6 +34,9 @@ def createMenu(x, y1, y2):
     buttonGM2 = RectBlit(colours['white'], (x, y2, 200, 100))
     buttonGM1.createBlit(screen)
     buttonGM2.createBlit(screen)
+
+    message_display('click the box', 25, x+100, y1+50, colours['black'])
+    message_display('help the box', 25, x+100, y2+50, colours['black'])
 
 
     
@@ -124,7 +127,7 @@ def main():
                 if pos[0] > x and pos[0] < x + 100 and pos[1] > y and pos[1] < y + 100:
                     xChange = 0
                     yChange = 0
-                    message_display('Stopped!', 115, screenWidth/2, screenHeight/2)
+                    message_display('Stopped!', 115, screenWidth/2, screenHeight/2, colours['white'])
                     gameOver = True
             #------------------------#
 
@@ -132,7 +135,7 @@ def main():
             #------------------------#
             elif gameMode == 2:
                 pass
-                message_display('Soon', 115, screenWidth/2, screenHeight/2)
+                message_display('Coming Soon', 115, screenWidth/2, screenHeight/2, colours['white'])
                 gameOver = True
             #------------------------#
             
