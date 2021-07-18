@@ -9,8 +9,8 @@ def text_objects(text, font):
     return textSurface, textSurface.get_rect()
 
 
-def message_display(text, xPos, yPos):
-    textFont = pygame.font.Font('freesansbold.ttf',115)
+def message_display(text, textSize, xPos, yPos):
+    textFont = pygame.font.Font('freesansbold.ttf',textSize)
     TextSurf, TextRect = text_objects(text, textFont)
     TextRect.center = ((xPos),(yPos))
     screen.blit(TextSurf, TextRect)
@@ -32,7 +32,10 @@ def checkFollowing():
 
 
 def createMenu():
-    pass
+    buttonGM1 = RectBlit(colours['white'], (screenWidth/2 - 100, screenHeight/4*3, 200, 100))
+    buttonGM2 = RectBlit(colours['white'], (screenWidth/2 - 100, screenWidth/4 + 50, 200, 100))
+    buttonGM1.createBlit(screen)
+    buttonGM2.createBlit(screen)
     
 
 def main():
@@ -58,8 +61,8 @@ def main():
     gameStarted = False
     gameOver = False
     gameMode = 0
+    menuOpen = True
     
-
     while running:
         #game init stuff
         #------------------------#
@@ -74,7 +77,10 @@ def main():
 
         #menu 
         #------------------------#
-
+        if menuOpen:
+            createMenu()
+            pygame.display.update()
+            print('hello')
         #------------------------#
 
         if gameStarted:
@@ -107,7 +113,7 @@ def main():
                 if pos[0] > x and pos[0] < x + 100 and pos[1] > y and pos[1] < y + 100:
                     xChange = 0
                     yChange = 0
-                    message_display('Stopped!', screenWidth/2, screenHeight/2)
+                    message_display('Stopped!', 115, screenWidth/2, screenHeight/2)
                     gameOver = True
             #------------------------#
 
