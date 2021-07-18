@@ -12,9 +12,9 @@ colours = {
     
 class RectBlit():
     
-    def  __init__(self, colour, rect):
+    def  __init__(self, colour, coordDimensions):
         self.colour = colour
-        self.rect = rect
+        self.rect = coordDimensions
         
     def createBlit(self, surface):
         pygame.draw.rect(surface, self.colour, self.rect)
