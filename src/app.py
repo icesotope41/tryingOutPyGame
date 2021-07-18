@@ -25,8 +25,13 @@ def checkCollide(gameEvents):
             pos = pygame.mouse.get_pos()
 
 
-def checkFollowing():
-    pass    
+def checkFollowing(gameEvents, x, y):
+    hoverPos = pygame.mouse.get_pos()
+
+    if hoverPos[0] > x and hoverPos[0] < x + 100 and hoverPos[1] > y and hoverPos[1] < y + 100:
+        return True
+    else:
+        return False     
 
 
 def createMenu(x, y1, y2):
@@ -134,9 +139,23 @@ def main():
             #help the box game
             #------------------------#
             elif gameMode == 2:
-                pass
-                message_display('Coming Soon', 115, screenWidth/2, screenHeight/2, colours['white'])
-                gameOver = True
+
+                if checkFollowing(gameEvents, x, y):
+                    if x < 10:
+                        y -= yChange
+                        if y < 10:
+                            x += xChange
+                    elif y < 10:
+                        x += xChange
+                        if x > screenWidth - 120:
+                            y += yChange
+                    elif x > screenWidth - 120:
+                        y += yChange
+                        if y > screenHeight - 110:
+                            x -= xChange
+                    elif y > screenHeight - 110:
+                        x -= xChange
+
             #------------------------#
             
             #refesh display
